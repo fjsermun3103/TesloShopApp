@@ -1,14 +1,14 @@
 // import { useState } from "react"
 // import { cn } from "@/lib/utils"
 import { useParams } from "react-router";
-import { getProductAction } from "../actions/get-product.action";
+import { getProductAction } from "../../../actions/get-product.action";
 
 export const ProductGallery = () => {
     // const [active, setActive] = useState(0)
 
-    const {idSlug = "" } = useParams();
-    
-    const product = getProductAction(idSlug); 
+    const { idSlug = "" } = useParams();
+
+    const product = getProductAction(idSlug);
     return (
         <div className="flex flex-col gap-4">
             <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-muted">

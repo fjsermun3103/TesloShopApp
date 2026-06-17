@@ -1,17 +1,19 @@
 import { Button } from "@/components/ui/button"
-import type { Product } from "@/mocks/products.mock"
 import { Filter, Grid, List } from "lucide-react"
 import ProductCard from "./ProductCard"
 import { FilterSidebar } from "./FilterSidebar"
-import { useSearchParams } from "react-router"
+import { Link, useSearchParams } from "react-router"
 import { useState } from "react"
+import type { Product } from "@/interfaces/product.interface"
 
 interface Props {
     products: Product[]
 }
 
-export const ProductsGrid = ({products}: Props) => {
+export const ProductsGrid = ({ products }:Props) => {
     
+
+
     const [ searchParams, setSearchParams ] = useSearchParams();
     
     const [ showFilters, setShowFilters ] = useState(false);
@@ -29,7 +31,7 @@ export const ProductsGrid = ({products}: Props) => {
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center space-x-4">
                         <h2 className="text-3xl font-light">Productos</h2>
-                        <span className="text-muted-foreground">({products.length} productos)</span>
+                        {/* <span className="text-muted-foreground">({products.stock} productos)</span> */}
                     </div>
 
                     <div className="flex items-center space-x-2">
@@ -88,23 +90,24 @@ export const ProductsGrid = ({products}: Props) => {
                         </div>
                     )}
 
-                    {/* Products Grid */}
-                    <div className="flex-1">
+                    {/* Products Grid */}                    <div className="flex-1">
                         <div className={
                             viewMode === 'grid'
                                 ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
                                 : "space-y-4"
                         }>
-                            {products.map((product) => (
-                                <ProductCard
-                                    key={product.id}
-                                    id={product.id}
-                                    name={product.name}
-                                    price={product.price}
-                                    image={product.image}
-                                    category={product.category}
-                                />
-                            ))}
+                                {products.map((product) => (
+                                    <Link key={product.slug} to={`/product/${product.slug}`}>
+                                        <ProductCard
+                                            id={product.id}
+                                            name={product.title}
+                                            price={product.price}
+                                            image={product.images[0]}
+                                            category={product.gender}
+                                            sizes={product.sizes}
+                                        />
+                                    </Link>
+                                ))}
                         </div>
                     </div>
                 </div>

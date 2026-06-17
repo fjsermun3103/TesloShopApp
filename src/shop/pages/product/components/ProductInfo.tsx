@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { useParams } from "react-router"
-import { getProductAction } from "../actions/get-product.action"
+import { getProductAction } from "../../../actions/get-product.action"
 
 
 export const ProductInfo = () => {
@@ -11,17 +11,17 @@ export const ProductInfo = () => {
 
     // const inStock = products.active && product.stock > 0
     // const { idSlug = "" } = useParams();
-    const {idSlug = "" } = useParams();
-    
-    
-    const product = getProductAction(idSlug); 
+    const { idSlug = "" } = useParams();
+
+
+    const product = getProductAction(idSlug);
     let inStock = ''
     if (!product) {
         inStock = "Unavailable"
     } else {
         inStock = 'available'
     };
-    
+
 
     return (
         <div className="flex flex-col">
@@ -74,7 +74,7 @@ export const ProductInfo = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                     {product?.sizes.map((size, index) => {
-                        
+
                         return (
                             <button
                                 key={index}
