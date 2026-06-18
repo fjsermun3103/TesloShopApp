@@ -2,6 +2,7 @@ import type { User } from '@/interfaces/user.interface'
 import { create } from 'zustand'
 import { loginAction } from '../actions/login.action';
 import { checkAuthAction } from '../actions/check-auth.action';
+import { registerAction } from '../actions/register.action';
 
 // TODO: Añadir e implementar función register
 type AuthStatus = 'authenticated' | 'not-authenticated' | 'checking';
@@ -18,6 +19,7 @@ type AuthState = {
   // Actions
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
+  register: (fullName: string, email: string, password: string) => Promise<boolean>;
   checkAuthStatus: () => Promise<boolean>,
 
 }
@@ -37,8 +39,6 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   // Actions
   login: async (email: string, password: string) => {
-    console.log({ email, password });
-
     try {
       const data = await loginAction(email, password);
       localStorage.setItem('token', data.token);
@@ -50,12 +50,29 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       localStorage.removeItem('token');
       set({ user: null, token: null, authStatus: 'not-authenticated' });
       return false;
-    }
+    };
   },
 
   logout: () => {
     localStorage.removeItem('token');
     set({ user: null, token: null, authStatus: 'not-authenticated' })
+  },
+
+  register: async (fullName: string, email: string, password: string) => {
+    console.log({fullName, email, password});
+
+    try {
+      const data = await registerAction(fullName, email, password);
+      localStorage.setItem('token', data.token);
+
+      set({user: data.user, token: data.token, authStatus: 'authenticated'});
+
+      return true;
+    } catch (error) {
+      localStorage.removeItem('token');
+      set({user:null, token: null, authStatus: 'not-authenticated'});
+      return false;
+    };
   },
 
   checkAuthStatus: async () => {
@@ -78,4 +95,4 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
     }
 
   }
-}))
+}));
