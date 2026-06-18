@@ -1,11 +1,11 @@
-import { ProductStats } from "./components/ProductStats"
-import { ProductGallery } from "./components/ProductGallery"
-import { ProductInfo } from "./components/ProductInfo"
-import { useParams } from "react-router"
-import { getProductAction } from "../../actions/get-product.action"
-import type { Product } from "@/interfaces/product.interface"
-import { useProducts } from "@/shop/hooks/useProducts"
-import { Button } from "@/components/ui/button"
+// import { ProductStats } from "./components/ProductStats"
+// import { ProductGallery } from "./components/ProductGallery"
+// import { ProductInfo } from "./components/ProductInfo"
+// import { useParams } from "react-router"
+// import { getProductAction } from "../../actions/get-product.action"
+// import type { Product } from "@/interfaces/product.interface"
+// import { useProducts } from "@/shop/hooks/useProducts"
+// import { Button } from "@/components/ui/button"
 
 export const ProductPage = () => {
 
