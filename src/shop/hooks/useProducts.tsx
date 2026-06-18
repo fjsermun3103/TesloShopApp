@@ -7,7 +7,6 @@ export const useProducts = () => {
 
   const { gender } = useParams();
 
-  // TODO: Viene Lógica
   const [ searchParams ] = useSearchParams();
   
   const limit = searchParams.get('limit') || 9;

@@ -11,8 +11,6 @@ interface Props {
 }
 
 export const ProductsGrid = ({ products }:Props) => {
-    
-
 
     const [ searchParams, setSearchParams ] = useSearchParams();
     
@@ -90,7 +88,8 @@ export const ProductsGrid = ({ products }:Props) => {
                         </div>
                     )}
 
-                    {/* Products Grid */}                    <div className="flex-1">
+                    {/* Products Grid */}                    
+                    <div className="flex-1">
                         <div className={
                             viewMode === 'grid'
                                 ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
